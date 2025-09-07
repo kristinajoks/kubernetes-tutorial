@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // JAXB (Jakarta XML Binding) — API + runtime impl
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.5'
+
+    // Jersey to auto (un)marshal XML entities in JAX-RS:
+    implementation "org.glassfish.jersey.media:jersey-media-jaxb:3.1.6"
+
+    // Jakarta Validation API (annotations like @Valid, @NotNull, etc.)
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+    // Reference implementation (Hibernate Validator)
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+    implementation 'org.glassfish:jakarta.el:4.0.2'
+
+    // Swagger JSON output needs Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+    implementation 'org.yaml:snakeyaml:1.30'
+
+    def jerseyVersion = '3.1.10'
+    implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: "${jerseyVersion}"
+    implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-jaxb', version: "${jerseyVersion}"
+    implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-moxy', version: "${jerseyVersion}"
+
+    implementation group: 'org.glassfish.jersey.core', name: 'jersey-server', version: "${jerseyVersion}"
+    implementation group: 'org.glassfish.jersey.core', name: 'jersey-client', version: "${jerseyVersion}"
+
+    implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: "${jerseyVersion}"
+    implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-jdk-http', version: "${jerseyVersion}"
+
+    // needed since version 2.26 and newer are not backward compatible
+    // https://stackoverflow.com/questions/44088493/jersey-stopped-working-with-injectionmanagerfactory-not-found
+    implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: "${jerseyVersion}"
+
+    implementation group: 'org.glassfish.jersey.ext', name: 'jersey-bean-validation', version: "${jerseyVersion}"
+
+}
+
+test {
+    useJUnitPlatform()
+}
