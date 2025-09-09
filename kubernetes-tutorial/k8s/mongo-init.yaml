@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-init
+  namespace: beverage
+data:
+  init.js: |
+    const dbName = process.env.MONGO_DB || "beverage";
+    const appUser = process.env.MONGO_USERNAME || "beverage";
+    const appPass = process.env.MONGO_PASSWORD || "beveragepw";
+    const db = db.getSiblingDB(dbName);
+    db.createUser({ user: appUser, pwd: appPass, roles: [{ role: "readWrite", db: dbName }] });
+    db.createCollection("beverages");

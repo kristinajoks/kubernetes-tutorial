@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: beverage-config
+  namespace: beverage
+data:
+  APP_NAME: "Beverage Service"

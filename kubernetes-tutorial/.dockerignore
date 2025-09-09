@@ -1,0 +1,12 @@
+# Gradle
+.gradle
+build
+out
+
+# IDE
+.idea
+*.iml
+
+# VCS / misc
+.git
+.gitignore

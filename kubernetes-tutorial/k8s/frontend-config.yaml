@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: beverage-frontend-nginx
+  namespace: beverage
+data:
+  nginx.conf: |
+    events {}
+    http {
+      # upstream points at your backend service inside the cluster
+      upstream beverage_backend {
+        server beverage-service.beverage.svc.cluster.local:8080;
+      }
+      server {
+        listen 80;
+        # static welcome
+        location = / {
+          return 200 'Beverage Frontend is up. Try /api/health or /api/beverages';
+        }
+        # proxy /api/* to backend
+        location /api/ {
+          proxy_pass http://beverage_backend/;
+          proxy_set_header Host $host;
+        }
+      }
+    }
