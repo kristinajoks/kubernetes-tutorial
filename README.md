@@ -81,13 +81,13 @@ DAO sloj: `BottleDaoMongo`, `CrateDaoMongo`, `BeverageDaoMongo`.
    ├─ deployment.yaml           # backend Deployment (probe, env, replicas)
    ├─ frontend-config.yaml      # nginx.conf (proxy /api → backend)
    ├─ frontend-deployment.yaml
-   └─ frontend-service.yaml     # NodePort (30081)
+   ├─ frontend-service.yaml     # NodePort (30081)
    ├─ mongo-init.yaml           # opciono: inicijalni JS (kreiranje user/db)
    ├─ mongo-secret.yaml
    ├─ mongo-statefulset.yaml
    ├─ mongo-service.yaml
    ├─ namespace.yaml
-   ├─ service.yaml              # backend Service (ClusterIP)
+   └─ service.yaml              # backend Service (ClusterIP)
 ```
 
 ---
